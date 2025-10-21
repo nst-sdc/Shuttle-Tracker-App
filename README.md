@@ -59,7 +59,7 @@ git push origin feature/<feature-name>
 - Open a Pull Request for review.
 
 ## License
-MIT License
+This project is licensed under the [MIT License](LICENSE.md).
 
 ## Credits
 Developed and maintained by NST Student Developer Club and contributors.
