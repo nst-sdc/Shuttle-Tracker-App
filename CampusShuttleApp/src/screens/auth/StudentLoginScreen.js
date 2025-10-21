@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Input from '../../components/common/Input';
 
 export default function StudentLoginScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
     console.log('Student login attempt:', { email, password });
+    // Implement actual login logic here
   };
 
   const handleGoogleSignIn = () => {
     console.log('Google Sign-In button pressed');
+    // Implement Google Sign-In logic here
   };
+
+  const toggleShowPassword = () => setShowPassword(prev => !prev);
 
   return (
     <View style={styles.container}>
@@ -28,22 +35,31 @@ export default function StudentLoginScreen() {
 
       <View style={styles.form}>
         <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder="Enter your email"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          containerStyle={styles.inputSpacing}
         />
 
         <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder="Enter your password"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+          secureTextEntry={!showPassword}
+          containerStyle={styles.inputSpacing}
+          rightAccessory={
+            <TouchableOpacity onPress={toggleShowPassword} style={styles.passwordToggleIcon}>
+              <MaterialCommunityIcons
+                name={showPassword ? 'eye-off' : 'eye'}
+                size={22}
+                color="#757575"
+              />
+            </TouchableOpacity>
+          }
         />
       </View>
 
@@ -90,14 +106,14 @@ const styles = StyleSheet.create({
     color: '#5A5A5A',
     marginBottom: 8,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 12,
-    padding: 16,
-    fontSize: 16,
-    backgroundColor: 'white',
+  // The custom Input component handles its own internal styling.
+  // We just provide margin for layout purposes.
+  inputSpacing: {
     marginBottom: 16,
+  },
+  passwordToggleIcon: {
+    // Add padding to make the touch target larger and easier to hit
+    padding: 8,
   },
   loginButton: {
     backgroundColor: '#007AFF',
@@ -131,4 +147,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
