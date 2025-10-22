@@ -35,7 +35,7 @@ code .
 ```
 
 3. Install dependencies based on your setup (`npm install` or `yarn install`).
-4. Run the development server (`npm start` or `yarn start`).
+4. Run the development server (`npx expo start` or `yarn start`).
 
 ## Contributing
 
