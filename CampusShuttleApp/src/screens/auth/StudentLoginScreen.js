@@ -6,6 +6,7 @@ export default function StudentLoginScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
     console.log('Student login attempt:', { email, password });
@@ -38,13 +39,21 @@ export default function StudentLoginScreen() {
         />
 
         <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={[styles.input, { flex: 1 }]}
+            placeholder="Enter your password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <Text style={styles.eyeIcon}>{showPassword ? '🙈' : '👁️'}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
@@ -99,6 +108,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginBottom: 16,
   },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  eyeButton: {
+    paddingHorizontal: 10,
+  },
+  eyeIcon: {
+    fontSize: 20,
+  },
   loginButton: {
     backgroundColor: '#007AFF',
     padding: 16,
@@ -131,4 +150,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
