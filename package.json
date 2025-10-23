@@ -1,0 +1,30 @@
+{
+  "name": "shuttle-tracker-app",
+  "version": "1.0.0",
+  "description": "Shuttle-Tracker-App is a campus transportation tool designed to provide real-time shuttle locations and route information, making daily commutes smoother and more predictable for everyone on campus. The app is aimed at students, faculty, and staff who rely on campus shuttle services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Subham-KRLX/Shuttle-Tracker-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Subham-KRLX/Shuttle-Tracker-App/issues"
+  },
+  "homepage": "https://github.com/Subham-KRLX/Shuttle-Tracker-App#readme",
+  "dependencies": {
+    "expo": "^54.0.18",
+    "react": "^19.2.0",
+    "react-native": "^0.80.2"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
+  }
+}
