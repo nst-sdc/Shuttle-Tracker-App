@@ -6,7 +6,7 @@ import DriverLoginScreen from '../screens/auth/DriverLoginScreen';
 
 const Stack = createNativeStackNavigator();
 
-export default function AuthStack() {
+export default function AuthStack({ toggleTheme, isDarkTheme }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -14,9 +14,21 @@ export default function AuthStack() {
         animation: 'slide_from_right',
       }}
     >
-      <Stack.Screen name="RoleSelection" component={RoleSelectionScreen} />
-      <Stack.Screen name="StudentLogin" component={StudentLoginScreen} />
-      <Stack.Screen name="DriverLogin" component={DriverLoginScreen} />
+      <Stack.Screen name="RoleSelection">
+        {(props) => (
+          <RoleSelectionScreen {...props} toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="StudentLogin">
+        {(props) => (
+          <StudentLoginScreen {...props} toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="DriverLogin">
+        {(props) => (
+          <DriverLoginScreen {...props} toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }

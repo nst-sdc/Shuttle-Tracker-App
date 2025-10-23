@@ -1,79 +1,60 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 
-export default function RoleSelectionScreen() {
+export default function RoleSelectionScreen({ toggleTheme, isDarkTheme }) {
+  const { colors } = useTheme();
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Campus Shuttle</Text>
-      
-      <Text style={styles.subtitle}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <TouchableOpacity style={styles.toggleButton} onPress={toggleTheme}>
+        <Text style={{ color: colors.text, fontSize: 20 }}>
+          {isDarkTheme ? '💡' : '🌙'}
+        </Text>
+      </TouchableOpacity>
+
+      <Text style={[styles.title, { color: colors.text }]}>
+        Welcome to Campus Shuttle
+      </Text>
+      <Text style={[styles.subtitle, { color: colors.text }]}>
         Please select your role to get started.
       </Text>
 
       <TouchableOpacity
-        style={styles.studentButton}
+        style={[styles.studentButton, { backgroundColor: colors.primary }]}
         onPress={() => navigation.navigate('StudentLogin')}
       >
-        <Text style={styles.buttonText}>🎓 I'm a Student</Text>
+        <Text style={[styles.buttonText, { color: 'white' }]}>🎓 I'm a Student</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.driverButton}
+        style={[styles.driverButton, { borderColor: colors.primary }]}
         onPress={() => navigation.navigate('DriverLogin')}
       >
-        <Text style={styles.driverButtonText}>🚌 I'm a Driver</Text>
+        <Text style={[styles.driverButtonText, { color: colors.primary }]}>🚌 I'm a Driver</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F7F8FA',
-    padding: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#1A202C',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#5A5A5A',
-    marginBottom: 40,
-  },
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  toggleButton: { position: 'absolute', top: 50, right: 20 },
+  title: { fontSize: 28, fontWeight: 'bold', marginBottom: 10 },
+  subtitle: { fontSize: 16, marginBottom: 40 },
   studentButton: {
-    backgroundColor: '#007AFF', 
     paddingVertical: 16,
     borderRadius: 12,
     marginBottom: 16,
     alignItems: 'center',
   },
   driverButton: {
-    backgroundColor: 'transparent',
     paddingVertical: 14,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#007AFF', 
     alignItems: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  driverButtonText: {
-    color: '#007AFF',
-    fontSize: 18,
-    fontWeight: '600',
-  },
+  buttonText: { fontSize: 18, fontWeight: '600' },
+  driverButtonText: { fontSize: 18, fontWeight: '600' },
 });
-

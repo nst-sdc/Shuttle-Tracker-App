@@ -14,7 +14,7 @@
     "@tamagui/font-inter": "1.94.3",
     "@tamagui/lucide-icons": "1.94.3",
     "@types/react": "~18.2.45",
-    "expo": "~50.0.17",
+    "expo": "^54.0.19",
     "expo-font": "~11.10.3",
     "expo-status-bar": "~1.11.1",
     "react": "^18.2.0",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@tamagui/babel-plugin": "1.94.3",
+    "@tamagui/babel-plugin": "^1.135.4",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4"
   },
   "private": true
