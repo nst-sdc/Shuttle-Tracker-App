@@ -100,10 +100,10 @@ What to include in the PR description:
 This project uses Expo. Common commands:
 
 ```bash
+cd CampusShuttleApp
 npm install        # install deps
 npx expo start     # start Metro / Expo dev server
-npm run android    # (if configured) run on Android emulator/device
-npm run ios        # (if configured) run on iOS simulator/device
+npm run ios        # run on iOS
 npm test           # run tests (if present)
 ```
 
@@ -122,14 +122,15 @@ npm install
 ## Reviewing & merging
 
 - Maintainers will review and request changes if necessary. Please respond to review comments promptly.
+
 - Small cosmetic changes may be merged quickly. Larger features may need additional design or QA.
 
 ## Licensing & Code of Conduct
 
-By contributing you agree to license your contributions under the project MIT license: see `LICENSE.md`.
+By contributing you agree to license your contributions under the project 
+MIT license: [LICENSE.md](LICENSE.md).
 
-This project follows the `CODE_OF_CONDUCT.md`. Be respectful and collaborative.
-
+This project follows the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Be respectful and collaborative.
 
 ## Templates (copy when creating issues or PRs)
 
@@ -148,5 +149,4 @@ Screenshots:
 ```
 
 ---
-
 Thanks for helping improve the Shuttle Tracker App — we appreciate your time and contributions! 🚀
