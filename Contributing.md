@@ -1,86 +1,152 @@
 # Contributing to NST Shuttle Tracker App
 
-Thank you for your interest in contributing to the NST Shuttle Tracker App! We welcome and appreciate all contributions, big or small, that help improve the project.
+Thank you for your interest in contributing! This guide is designed to make it fast and easy to contribute — whether you’re filing a bug, requesting a feature, or submitting code.
 
-## Getting Started
+If something is unclear, open an issue or join the community chat (Discord) and ask — we’ll help you get started.
 
-To get started contributing:
+## Quick start
 
 1. Fork the repository on GitHub.
-2. Clone your fork locally:
+2. Clone your fork and install dependencies:
 
-    ```
-    git clone https://github.com/your-username/Shuttle-Tracker-App.git
-    cd Shuttle-Tracker-App
-    ```
+```bash
+git clone https://github.com/<your-username>/Shuttle-Tracker-App.git
+cd CampusShuttleApp
+npm install
+```
 
-3. Create a new branch for your feature or fix:
+3. Create a feature branch:
 
-    ```
-    git checkout -b feature/your-feature-name
-    ```
+```bash
+git checkout -b feature/short-description
+```
 
-4. Make your changes locally.
-5. Run tests and verify your changes.
-6. Run the app locally using the command:
+4. Run the app locally (Expo is used in this project):
 
-    ```
-    npx expo start
-    ```
+```bash
+npx expo start
+```
 
-7. Commit your changes with clear, descriptive messages.
-8. Push your branch to your forked repository:
+5. Make your changes, add tests if relevant, then commit and push:
 
-    ```
-    git push origin feature/your-feature-name
-    ```
+```bash
+git add -A
+git commit -m "feature: short description of change"
+git push origin feature/short-description
+```
 
-9. Open a Pull Request in the main repository describing your changes.
+6. Open a Pull Request (PR) from your branch to `main`.
 
-10. After adding your feature, please share a screenshot demonstrating that the feature works correctly.
+## Filing a great issue
 
-## Report Bugs
+Before opening an issue, search existing issues (open + closed). If none match, use the template below.
 
-To report a bug:
+Issue template (copy into the issue body):
 
-- Check the open and closed issues to see if it has already been reported.
-- Open a new issue with a clear reproducible example.
-- Include relevant information such as app version, platform, and steps to reproduce.
+```
+Title: [bug|feature] short description
 
-## Suggest Features
+Describe the problem or feature request:
 
-To suggest a feature:
+Steps to reproduce (for bugs):
+1. ...
+2. ...
 
-- Search existing issues to avoid duplicates.
-- Open a new issue with a detailed description of the feature, use cases, and benefits.
+Expected behavior:
 
-## Code Guidelines
+Actual behavior:
 
-- Follow existing code style and formatting.
-- Write clear and concise commit messages.
-- Provide documentation and comments where necessary.
-- Include tests for new features and bug fixes when possible.
+Environment:
+- App version: (from package.json or app)
+- Platform: iOS / Android / Web
+- Node / npm / expo versions:
 
-## Pull Request Process
+Screenshots or logs:
+[attach if available]
 
-- Pull Requests (PRs) should be targeted at the `main` branch.
-- PRs must pass all automated checks and tests.
-- Ensure your PR is atomic focused on a single feature or fix.
-- Maintain constructive and respectful communication during the review process.
+Additional context:
 
-## Contributor License Agreement (CLA)
+```
 
-By contributing to this project, you agree to grant the NST Student Developer Club the rights to use your contribution under the project's [MIT License](LICENSE.md).
+A clear issue speeds up triage and fixes. Add minimal repro steps and a screenshot when possible.
 
-## Code of Conduct
+## Opening a Pull Request
 
-This project has adopted the [NST Student Developer Club Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+PR checklist (we use this to speed reviews):
 
-## Community and Support
+- [ ] Is the PR targeted at `main`? If your change is large, open a draft PR and discuss first.
+- [ ] Did you run the app locally and verify the change works?
+- [ ] Are there tests for new behavior? (unit / integration)
+- [ ] Are changes documented (if they change public behavior)?
+- [ ] Commit messages are short and prefixed (feat|fix|chore|docs|test):
+  - Examples: `feature: add signup screen`, `fix(login): prevent crash when ...`
+- [ ] Include screenshots or GIFs for UI changes.
 
-- Join our Discord for real-time collaboration and discussion: [Discord Invite Link]
-- Ask questions or seek help by opening issues on GitHub.
+What to include in the PR description:
+
+- A short summary of what the PR does.
+- The motivation or problem it solves.
+- How to test the change locally (commands or steps).
+- Any edge-cases or follow-up tasks.
+
+## Branching & commit conventions
+
+- Branch names: `feature/...`, `fix/...`, `chore/...`, `docs/...`, `test/...`.
+- Keep PRs focused and small — one logical change per PR.
+- Commit message style: `type(scope?): short summary` (scope is optional).
+
+## Running the project and tests
+
+This project uses Expo. Common commands:
+
+```bash
+npm install        # install deps
+npx expo start     # start Metro / Expo dev server
+npm run android    # (if configured) run on Android emulator/device
+npm run ios        # (if configured) run on iOS simulator/device
+npm test           # run tests (if present)
+```
+
+If you run into dependency issues on macOS, try removing node_modules and reinstalling:
+
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+## Code style and tests
+
+- Follow existing code patterns and formatting. If the project uses ESLint, Prettier or TypeScript, lint locally before opening a PR.
+- Add tests for bug fixes and new features where practical. Keep tests deterministic and fast.
+
+## Reviewing & merging
+
+- Maintainers will review and request changes if necessary. Please respond to review comments promptly.
+- Small cosmetic changes may be merged quickly. Larger features may need additional design or QA.
+
+## Licensing & Code of Conduct
+
+By contributing you agree to license your contributions under the project MIT license: see `LICENSE.md`.
+
+This project follows the `CODE_OF_CONDUCT.md`. Be respectful and collaborative.
+
+
+## Templates (copy when creating issues or PRs)
+
+- Quick issue template shown above.
+- Quick PR template:
+
+```
+Title: short description
+
+Summary:
+
+Notes:
+
+Screenshots:
+
+```
 
 ---
 
-Thank you for helping make the NST Shuttle Tracker App better!
+Thanks for helping improve the Shuttle Tracker App — we appreciate your time and contributions! 🚀
