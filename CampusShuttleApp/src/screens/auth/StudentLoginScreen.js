@@ -65,7 +65,12 @@ export default function StudentLoginScreen() {
       </TouchableOpacity>
 
       <Text style={styles.signupText}>
-        Don't have an account? Sign Up
+        Don't have an account?  <Text
+          style={{ color: '#007AFF', fontWeight: '600' }}
+          onPress={() => navigation.navigate('StudentSignup')}
+        >
+          Sign Up
+        </Text>
       </Text>
     </View>
   );
