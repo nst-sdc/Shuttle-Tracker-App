@@ -4,14 +4,14 @@ Thank you for your interest in contributing! This guide is designed to make it f
 
 If something is unclear, open an issue or join the community chat (Discord) and ask — we’ll help you get started.
 
-## Quick start
+## Quick start (10 minutes)
 
 1. Fork the repository on GitHub.
 2. Clone your fork and install dependencies:
 
 ```bash
 git clone https://github.com/<your-username>/Shuttle-Tracker-App.git
-cd CampusShuttleApp
+cd Shuttle-Tracker-App
 npm install
 ```
 
@@ -130,6 +130,10 @@ By contributing you agree to license your contributions under the project MIT li
 
 This project follows the `CODE_OF_CONDUCT.md`. Be respectful and collaborative.
 
+## Community & support
+
+- Join our Discord: [Discord Invite Link] — mention "help-wanted" for guidance.
+- File issues for questions if the chat is unavailable.
 
 ## Templates (copy when creating issues or PRs)
 
@@ -140,6 +144,9 @@ This project follows the `CODE_OF_CONDUCT.md`. Be respectful and collaborative.
 Title: short description
 
 Summary:
+
+How to test:
+1. ...
 
 Notes:
 
