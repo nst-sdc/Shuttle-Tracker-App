@@ -7,6 +7,8 @@ module.exports = function (api) {
     ],
     plugins: [
       '@babel/plugin-syntax-flow',
+      '@tamagui/babel-plugin',
+      'babel-plugin-transform-inline-environment-variables',
       'react-native-reanimated/plugin',
     ],
   };
