@@ -23,7 +23,7 @@ export default function RoleSelectionScreen({ toggleTheme, isDarkTheme }) {
 
       <TouchableOpacity
         style={[styles.studentButton, { backgroundColor: colors.primary }]}
-        onPress={() => navigation.navigate('StudentLogin')}
+        onPress={() => navigation.navigate('StudentHome')}
       >
         <Text style={[styles.buttonText, { color: 'white' }]}>🎓 I'm a Student</Text>
       </TouchableOpacity>
