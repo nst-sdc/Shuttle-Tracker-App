@@ -1,13 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 
 export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={[styles.backButtonText, { color: colors.text }]}>← Back</Text>
+        </TouchableOpacity>
+        
         <TouchableOpacity style={styles.toggleButton} onPress={toggleTheme}>
           <Text style={{ color: colors.text, fontSize: 20 }}>
             {isDarkTheme ? '💡' : '🌙'}
@@ -63,7 +71,15 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  backButton: {
+    marginBottom: 0,
+  },
+  backButtonText: {
+    fontSize: 18,
   },
   toggleButton: {
     padding: 10,
