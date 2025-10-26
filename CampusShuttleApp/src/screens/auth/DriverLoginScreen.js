@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
-import { Sun, Moon, Eye, EyeOff } from '@tamagui/lucide-icons';
 
 export default function DriverLoginScreen({ toggleTheme, isDarkTheme }) {
   const navigation = useNavigation();
@@ -28,11 +27,7 @@ export default function DriverLoginScreen({ toggleTheme, isDarkTheme }) {
         style={styles.themeToggleButton}
         onPress={toggleTheme}
       >
-        {isDarkTheme ? (
-          <Sun size={18} color={colors.text} />
-        ) : (
-          <Moon size={18} color={colors.text} />
-        )}
+        <Text style={{ fontSize: 18 }}>{isDarkTheme ? '💡' : '🌙'}</Text>
       </TouchableOpacity>
 
       <Text style={[styles.title, { color: colors.text }]}>Driver Login</Text>
@@ -62,11 +57,7 @@ export default function DriverLoginScreen({ toggleTheme, isDarkTheme }) {
             style={styles.eyeButton}
             onPress={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? (
-              <EyeOff size={20} color={colors.text} />
-            ) : (
-              <Eye size={20} color={colors.text} />
-            )}
+            <Text style={[styles.eyeIcon, { color: colors.text }]}>{showPassword ? '🙈' : '👁️'}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -120,6 +111,9 @@ const styles = StyleSheet.create({
   },
   eyeButton: {
     paddingHorizontal: 10,
+  },
+  eyeIcon: {
+    fontSize: 20,
   },
   loginButton: {
     padding: 16,
