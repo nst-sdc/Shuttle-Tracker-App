@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
-import { Sun, Moon, Bus, MapPin, Clock } from '@tamagui/lucide-icons';
 
 export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
   const { colors } = useTheme();
@@ -18,11 +17,9 @@ export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.toggleButton} onPress={toggleTheme}>
-          {isDarkTheme ? (
-            <Sun size={20} color={colors.text} />
-          ) : (
-            <Moon size={20} color={colors.text} />
-          )}
+          <Text style={{ color: colors.text, fontSize: 20 }}>
+            {isDarkTheme ? '💡' : '🌙'}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -36,36 +33,27 @@ export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
         </Text>
 
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
-          <View style={styles.cardHeader}>
-            <Bus size={24} color={colors.primary} style={styles.cardIcon} />
-            <Text style={[styles.cardTitle, { color: colors.text }]}>
-              Live Shuttle Tracking
-            </Text>
-          </View>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>
+            🚌 Live Shuttle Tracking
+          </Text>
           <Text style={[styles.cardDescription, { color: colors.text }]}>
             View real-time shuttle locations and arrival times
           </Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
-          <View style={styles.cardHeader}>
-            <MapPin size={24} color={colors.primary} style={styles.cardIcon} />
-            <Text style={[styles.cardTitle, { color: colors.text }]}>
-              Route Information
-            </Text>
-          </View>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>
+            📍 Route Information
+          </Text>
           <Text style={[styles.cardDescription, { color: colors.text }]}>
             Check shuttle routes and schedules
           </Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
-          <View style={styles.cardHeader}>
-            <Clock size={24} color={colors.primary} style={styles.cardIcon} />
-            <Text style={[styles.cardTitle, { color: colors.text }]}>
-              Arrival Times
-            </Text>
-          </View>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>
+            ⏰ Arrival Times
+          </Text>
           <Text style={[styles.cardDescription, { color: colors.text }]}>
             Get accurate ETAs for your next shuttle
           </Text>
@@ -117,18 +105,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
   },
-  cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  cardIcon: {
-    marginRight: 12,
-  },
   cardTitle: {
     fontSize: 20,
     fontWeight: '600',
-    flex: 1,
+    marginBottom: 8,
   },
   cardDescription: {
     fontSize: 16,
