@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { Sun, Moon, Eye, EyeOff, Search } from '@tamagui/lucide-icons';
 
 export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
   const navigation = useNavigation();
@@ -34,7 +35,11 @@ export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
         style={styles.themeToggleButton}
         onPress={toggleTheme}
       >
-        <Text style={{ fontSize: 20 }}>{isDarkTheme ? '💡' : '🌙'}</Text>
+        {isDarkTheme ? (
+          <Sun size={20} color={colors.text} />
+        ) : (
+          <Moon size={20} color={colors.text} />
+        )}
       </TouchableOpacity>
 
       <Text style={[styles.title, { color: colors.text }]}>Student Login</Text>
@@ -65,7 +70,11 @@ export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
             style={styles.eyeButton}
             onPress={() => setShowPassword(!showPassword)}
           >
-            <Text style={[styles.eyeIcon, { color: colors.text }]}>{showPassword ? '🙈' : '👁️'}</Text>
+            {showPassword ? (
+              <EyeOff size={20} color={colors.text} />
+            ) : (
+              <Eye size={20} color={colors.text} />
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -75,7 +84,10 @@ export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.googleButton, { borderColor: colors.border }]} onPress={handleGoogleSignIn}>
-        <Text style={[styles.googleButtonText, { color: colors.text }]}>🔍 Sign in with Google</Text>
+        <View style={styles.googleButtonContent}>
+          <Search size={16} color={colors.text} style={styles.googleIcon} />
+          <Text style={[styles.googleButtonText, { color: colors.text }]}>Sign in with Google</Text>
+        </View>
       </TouchableOpacity>
 
       <Text style={[styles.signupText, { color: colors.text }]}>
@@ -153,6 +165,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignItems: 'center',
     marginBottom: 20,
+  },
+  googleButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  googleIcon: {
+    marginRight: 8,
   },
   googleButtonText: {
     fontSize: 16,
