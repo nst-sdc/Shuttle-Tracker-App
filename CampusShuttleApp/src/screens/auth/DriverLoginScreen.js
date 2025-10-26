@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function DriverLoginScreen({ toggleTheme, isDarkTheme }) {
   const navigation = useNavigation();
@@ -17,11 +18,14 @@ export default function DriverLoginScreen({ toggleTheme, isDarkTheme }) {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={[styles.backButtonText, { color: colors.text }]}>← Back</Text>
-      </TouchableOpacity>
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <View style={styles.backButtonContent}>
+            <Ionicons name="arrow-back" size={20} color={colors.text} />
+            <Text style={[styles.backButtonText, { color: colors.text }]}>Back</Text>
+          </View>
+        </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.themeToggleButton}
@@ -77,6 +81,11 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginBottom: 20,
+  },
+  backButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
   backButtonText: {
     fontSize: 18,

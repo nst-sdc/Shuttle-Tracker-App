@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
   const { colors } = useTheme();
@@ -13,7 +14,10 @@ export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Text style={[styles.backButtonText, { color: colors.text }]}>← Back</Text>
+          <View style={styles.backButtonContent}>
+            <Ionicons name="arrow-back" size={20} color={colors.text} />
+            <Text style={[styles.backButtonText, { color: colors.text }]}>Back</Text>
+          </View>
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.toggleButton} onPress={toggleTheme}>
@@ -77,6 +81,11 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginBottom: 0,
+  },
+  backButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
   backButtonText: {
     fontSize: 18,
