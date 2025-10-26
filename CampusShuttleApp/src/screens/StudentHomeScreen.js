@@ -1,17 +1,60 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated } from 'react-native';
+import { useTheme, useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather'; // Feather has clean icons
 
 export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
   const { colors } = useTheme();
+  const navigation = useNavigation();
+  const [themeAnim] = useState(new Animated.Value(0));
+
+  const handleToggleTheme = () => {
+    Animated.sequence([
+      Animated.timing(themeAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(themeAnim, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+    ]).start();
+    toggleTheme();
+  };
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.toggleButton} onPress={toggleTheme}>
-          <Text style={{ color: colors.text, fontSize: 20 }}>
-            {isDarkTheme ? '💡' : '🌙'}
-          </Text>
+        {/* Back Button */}
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.navigate('RoleSelection')}
+        >
+          <Icon name="arrow-left" size={22} color={colors.text} />
+        </TouchableOpacity>
+
+        {/* Theme Toggle */}
+        <TouchableOpacity style={styles.toggleButton} onPress={handleToggleTheme}>
+          <Animated.View
+            style={{
+              transform: [
+                {
+                  rotate: themeAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['0deg', '180deg'],
+                  }),
+                },
+              ],
+            }}
+          >
+            <Icon
+              name={isDarkTheme ? 'sun' : 'moon'}
+              size={22}
+              color={colors.text}
+            />
+          </Animated.View>
         </TouchableOpacity>
       </View>
 
@@ -24,27 +67,33 @@ export default function StudentHomeScreen({ toggleTheme, isDarkTheme }) {
           Track your campus shuttle in real-time
         </Text>
 
+        {/* Live Shuttle Tracking Card */}
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <Icon name="truck" size={24} color={colors.primary} style={{ marginBottom: 8 }} />
           <Text style={[styles.cardTitle, { color: colors.text }]}>
-            🚌 Live Shuttle Tracking
+            Live Shuttle Tracking
           </Text>
           <Text style={[styles.cardDescription, { color: colors.text }]}>
             View real-time shuttle locations and arrival times
           </Text>
         </View>
 
+        {/* Route Information Card */}
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <Icon name="map-pin" size={24} color={colors.primary} style={{ marginBottom: 8 }} />
           <Text style={[styles.cardTitle, { color: colors.text }]}>
-            📍 Route Information
+            Route Information
           </Text>
           <Text style={[styles.cardDescription, { color: colors.text }]}>
             Check shuttle routes and schedules
           </Text>
         </View>
 
+        {/* Arrival Times Card */}
         <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <Icon name="clock" size={24} color={colors.primary} style={{ marginBottom: 8 }} />
           <Text style={[styles.cardTitle, { color: colors.text }]}>
-            ⏰ Arrival Times
+            Arrival Times
           </Text>
           <Text style={[styles.cardDescription, { color: colors.text }]}>
             Get accurate ETAs for your next shuttle
@@ -63,7 +112,12 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  backButton: {
+    padding: 10,
   },
   toggleButton: {
     padding: 10,
