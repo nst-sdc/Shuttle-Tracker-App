@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginBottom: 20,
+    alignSelf: 'flex-start',
   },
   themeToggleButton: {
     position: 'absolute',
