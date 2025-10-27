@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+} from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
-import { Sun, Moon, Eye, EyeOff, Search } from '@tamagui/lucide-icons';
+import Icon from 'react-native-vector-icons/Feather'; // Feather has clean icons
 
 export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
   const navigation = useNavigation();
@@ -9,6 +16,8 @@ export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [themeAnim] = useState(new Animated.Value(0));
+  const [eyeAnim] = useState(new Animated.Value(0));
 
   const handleLogin = () => {
     console.log('Student login attempt:', { email, password });
@@ -18,32 +27,85 @@ export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
     console.log('Google Sign-In button pressed');
   };
 
+  const handleToggleTheme = () => {
+    Animated.sequence([
+      Animated.timing(themeAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(themeAnim, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+    ]).start();
+    toggleTheme();
+  };
+
+  const handleTogglePassword = () => {
+    Animated.sequence([
+      Animated.timing(eyeAnim, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(eyeAnim, {
+        toValue: 0,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+    ]).start();
+    setShowPassword(!showPassword);
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      {/* Back Button */}
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}
       >
-        <Text style={[styles.backButtonText, { color: colors.primary }]}>← Back</Text>
+        <Icon name="arrow-left" size={22} color={colors.text} />
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.themeToggleButton}
-        onPress={toggleTheme}
-      >
-        {isDarkTheme ? (
-          <Sun size={20} color={colors.text} />
-        ) : (
-          <Moon size={20} color={colors.text} />
-        )}
+      {/* Theme Toggle */}
+      <TouchableOpacity style={styles.themeToggleButton} onPress={handleToggleTheme}>
+        <Animated.View
+          style={{
+            transform: [
+              {
+                rotate: themeAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['0deg', '180deg'],
+                }),
+              },
+            ],
+          }}
+        >
+          <Icon
+            name={isDarkTheme ? 'sun' : 'moon'}
+            size={22}
+            color={colors.text}
+          />
+        </Animated.View>
       </TouchableOpacity>
 
+      {/* Title */}
       <Text style={[styles.title, { color: colors.text }]}>Student Login</Text>
 
+      {/* Form */}
       <View style={styles.form}>
         <Text style={[styles.label, { color: colors.text }]}>Email</Text>
         <TextInput
-          style={[styles.input, { backgroundColor: colors.card, color: colors.text, borderColor: colors.border }]}
+          style={[
+            styles.input,
+            {
+              color: colors.text,
+              borderColor: colors.border || '#E0E0E0',
+              backgroundColor: colors.card || 'white',
+            },
+          ]}
           placeholder="Enter your email"
           placeholderTextColor={colors.text + '99'}
           value={email}
@@ -55,35 +117,58 @@ export default function StudentLoginScreen({ toggleTheme, isDarkTheme }) {
         <Text style={[styles.label, { color: colors.text }]}>Password</Text>
         <View style={styles.passwordContainer}>
           <TextInput
-            style={[styles.input, { flex: 1, backgroundColor: colors.card, color: colors.text, borderColor: colors.border }]}
+            style={[
+              styles.input,
+              {
+                flex: 1,
+                color: colors.text,
+                borderColor: colors.border || '#E0E0E0',
+                backgroundColor: colors.card || 'white',
+              },
+            ]}
             placeholder="Enter your password"
             placeholderTextColor={colors.text + '99'}
             value={password}
             onChangeText={setPassword}
             secureTextEntry={!showPassword}
           />
-          <TouchableOpacity
-            style={styles.eyeButton}
-            onPress={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? (
-              <EyeOff size={20} color={colors.text} />
-            ) : (
-              <Eye size={20} color={colors.text} />
-            )}
+          <TouchableOpacity style={styles.eyeButton} onPress={handleTogglePassword}>
+            <Animated.View
+              style={{
+                transform: [
+                  {
+                    scale: eyeAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [1, 1.2],
+                    }),
+                  },
+                ],
+              }}
+            >
+              <Icon
+                name={showPassword ? 'eye-off' : 'eye'}
+                size={20}
+                color={colors.text}
+              />
+            </Animated.View>
           </TouchableOpacity>
         </View>
       </View>
 
-      <TouchableOpacity style={[styles.loginButton, { backgroundColor: colors.primary }]} onPress={handleLogin}>
-        <Text style={[styles.loginButtonText, { color: colors.background }]}>Login</Text>
+      {/* Login Button */}
+      <TouchableOpacity
+        style={[styles.loginButton, { backgroundColor: colors.primary }]}
+        onPress={handleLogin}
+      >
+        <Text style={[styles.loginButtonText, { color: colors.background }]}>
+          Login
+        </Text>
       </TouchableOpacity>
 
+      {/* Google Sign-In Button */}
       <TouchableOpacity style={[styles.googleButton, { borderColor: colors.border }]} onPress={handleGoogleSignIn}>
-        <View style={styles.googleButtonContent}>
-          <Search size={16} color={colors.text} style={styles.googleIcon} />
-          <Text style={[styles.googleButtonText, { color: colors.text }]}>Sign in with Google</Text>
-        </View>
+        <Icon name="search" size={18} color={colors.text} style={{ marginRight: 8 }} />
+        <Text style={[styles.googleButtonText, { color: colors.text }]}>Sign in with Google</Text>
       </TouchableOpacity>
 
       <Text style={[styles.signupText, { color: colors.text }]}>
@@ -101,9 +186,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginBottom: 20,
-  },
-  backButtonText: {
-    fontSize: 18,
   },
   themeToggleButton: {
     position: 'absolute',
@@ -136,9 +218,6 @@ const styles = StyleSheet.create({
   eyeButton: {
     paddingHorizontal: 10,
   },
-  eyeIcon: {
-    fontSize: 20,
-  },
   loginButton: {
     padding: 16,
     borderRadius: 12,
@@ -156,13 +235,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     alignItems: 'center',
     marginBottom: 20,
-  },
-  googleButtonContent: {
     flexDirection: 'row',
-    alignItems: 'center',
-  },
-  googleIcon: {
-    marginRight: 8,
+    justifyContent: 'center',
   },
   googleButtonText: {
     fontSize: 16,
